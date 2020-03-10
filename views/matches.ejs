@@ -1,0 +1,44 @@
+<%- include ('./partials/head.ejs') %>
+<%- include ('./partials/header.ejs') %>
+
+<main>
+    <h1>Matches</h1>
+    <% matches.forEach(match => { %>
+        <a class="match-block" href="#/match/">
+            <div class="teams">
+                <div class="team">
+                    <span>
+                        <img src="./img/<%= match.homeTeam.shortName %>.svg"/>
+                        <%= match.homeTeam.shortName %>
+                    </span>
+                    <% if (match.status !== 'SCHEDULED' || match.status !== 'POSTPONED') { %>
+                    <span><%= match.score.fullTime.homeTeam %></span>
+                    <% } %>
+                </div>
+                <div class="team">
+                    <span>
+                        <img src="./img/<%= match.awayTeam.shortName %>.svg"/>
+                        <%=match.awayTeam.shortName%>
+                    </span>
+                    <% if (match.status !== 'SCHEDULED' || match.status !== 'POSTPONED') { %>
+                    <span><%= match.score.fullTime.awayTeam %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="meta">
+                <div class="status">
+                    <% if (match.status === 'FINISHED') { %>
+                        FT
+                    <% } else if (match.status === 'SCHEDULED') { %>
+                        <%= match.dateOfPlaying.time %>
+                    <% } %>
+                </div>
+                <div class="date">
+                    <%= `${match.dateOfPlaying.day}, ${match.dateOfPlaying.monthAndDay}` %>
+                </div>
+            </div>
+        </a>
+    <% }) %>
+</main>
+
+<%- include ('./partials/footer.ejs') %>
