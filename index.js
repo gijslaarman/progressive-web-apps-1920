@@ -15,12 +15,13 @@ app
 // Routes
 app
 .use('/', require('./routes/matches'))
-// .use('/standings', require('./routes/standings'))
-// .use('/match/:id', require('./routes/match'))
+.use('/match/:id', require('./routes/match'))
+.use('/standings', require('./routes/standings'))
 // .use('/team/:name', require('./routes/team'))
 
 app.listen(port, () => {
     MongoClient.connect(`${process.env.DB_URL}:${process.env.DB_PORT}`, { useUnifiedTopology: true }, (err, client) => {
+        if (err) throw new(err)
         db = client.db('PWA')
     })
 

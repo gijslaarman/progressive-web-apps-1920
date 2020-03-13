@@ -3,10 +3,13 @@
 
 <main>
     <h1>Matches</h1>
+
+    <!-- Show all matches for this matchweek. -->
     <% matches.forEach(match => { %>
-        <a class="match-block" href="#/match/">
+        <a class="match-block" href="match/<%= match.id %>">
             <div class="teams">
-                <div class="team">
+
+                <div class="team <% if (match.score.winner === 'AWAY_TEAM') { %> lost <% } %>">
                     <span>
                         <img src="./img/<%= match.homeTeam.shortName %>.svg"/>
                         <%= match.homeTeam.shortName %>
@@ -15,7 +18,8 @@
                     <span><%= match.score.fullTime.homeTeam %></span>
                     <% } %>
                 </div>
-                <div class="team">
+
+                <div class="team <% if (match.score.winner === 'HOME_TEAM') { %> lost <% } %>">
                     <span>
                         <img src="./img/<%= match.awayTeam.shortName %>.svg"/>
                         <%=match.awayTeam.shortName%>
@@ -24,8 +28,11 @@
                     <span><%= match.score.fullTime.awayTeam %></span>
                     <% } %>
                 </div>
+
             </div>
+
             <div class="meta">
+
                 <div class="status">
                     <% if (match.status === 'FINISHED') { %>
                         FT
@@ -33,12 +40,15 @@
                         <%= match.dateOfPlaying.time %>
                     <% } %>
                 </div>
+
                 <div class="date">
-                    <%= `${match.dateOfPlaying.day}, ${match.dateOfPlaying.monthAndDay}` %>
+                    <%= `${match.dateOfPlaying.day}` %>
                 </div>
+
             </div>
         </a>
     <% }) %>
+
 </main>
 
 <%- include ('./partials/footer.ejs') %>
