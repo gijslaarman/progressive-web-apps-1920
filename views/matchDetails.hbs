@@ -1,0 +1,32 @@
+<div class="details <%= match.status %>">
+    <div class="top">
+        <div class="wrapper">
+            <span class="status <% if (match.status === 'SCHEDULED') { %>hide<% } %>"><%= match.status %></span>
+            <span class="date">
+                Datum
+            </span>
+        </div>
+    </div>
+    <div class="teams">
+        <div class="team">
+            <img src="" />
+            <h3><%= match.homeTeam.name %></h3>
+        </div>
+        <div class="score">
+            <% if (match.status === 'FINISHED' || match.status === 'IN_PLAY' ) { %>
+            <span>${match.score.fullTime.homeTeam}</span>
+            <span>-</span>
+            <span>${match.score.fullTime.awayTeam}</span>
+            <% } else { %>
+            <span>-</span>
+            <% } %>
+        </div>
+        <div class="team">
+            <img src="" />
+            <h3><%= match.awayTeam.name%></h3>
+        </div>
+    </div>
+    <div class="venue">
+        <p>Venue: <span><%= match.venue %></span></p>
+    </div>
+</div>

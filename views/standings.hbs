@@ -1,0 +1,29 @@
+<table>
+    <tbody>
+        <tr>
+            <th class="club">Club</th>
+            <th>MP</th>
+            <th class="no-mobile">W</th>
+            <th class="no-mobile">D</th>
+            <th class="no-mobile">L</th>
+            <th class="no-mobile">GF</th>
+            <th class="no-mobile">GA</th>
+            <th>+/-</th>
+            <th>Pts</th>
+        </tr>
+
+        {{#each rows}}
+        <tr onclick="window.location='/teams/{{team.id}}'">
+            <td class="club"><span class="position">{{position}}</span> <img class="crest" src="{{team.crestUrl}}" />{{team.name}}</td>
+            <td>{{playedGames}}</td>
+            <td class="no-mobile">{{won}}</td>
+            <td class="no-mobile">{{draw}}</td>
+            <td class="no-mobile">{{lost}}</td>
+            <td class="no-mobile">{{goalsFor}}</td>
+            <td class="no-mobile">{{goalsAgainst}}</td>
+            <td>{{goalDifference}}</td>
+            <td class="bold">{{points}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

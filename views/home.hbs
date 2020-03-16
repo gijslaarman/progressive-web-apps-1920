@@ -1,0 +1,27 @@
+{{#each matches}}
+<a href="/match/{{id}}">
+
+    <div class="teams">
+        <div class="team 
+            {{#with awayTeam.winner}}
+            lost
+            {{/with}}">
+            <span>
+                <img src="https://via.placeholder.com/24x24" />
+                {{homeTeam.name}}
+            </span>
+        </div>
+
+        <div class="team 
+        {{#with homeTeam.winner}}
+            lost
+        {{/with}}">
+            <span>
+                <img src="https://via.placeholder.com/24x24" />
+                {{awayTeam.name}}
+            </span>
+        </div>
+    </div>
+
+</a>
+{{/each}}
