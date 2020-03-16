@@ -9,7 +9,6 @@ require('./utils/init')()
 
 app
 .use(express.static('public'))
-.use(express.static('files'))
 .set('view engine', 'ejs')
 
 // Routes

@@ -4,6 +4,10 @@
   "description": "Progressive web app",
   "main": "index.js",
   "scripts": {
+    "buildteams": "node generateTeams.js",
+    "prebuild": "npm run buildteams",
+    "build": "node index.js",
+    "predev": "npm run buildteams",
     "dev": "nodemon index.js"
   },
   "repository": {

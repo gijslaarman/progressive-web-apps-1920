@@ -12,15 +12,4 @@ router.get('/', (req, res) => {
     })
 })
 
-// router.get('/', (req, res) => {
-//     const matchId = req.params.id
-//     Api.get().then(result => result.data)
-//     // Api.get(`/matches/${req.params.id}`)
-//     // .then(result => result.data)
-//     // .then(match => {
-//     //     console.log(match)
-//     //     return res.render('match.ejs', { data: match })
-//     // })
-// })
-
 module.exports = router
