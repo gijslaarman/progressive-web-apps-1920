@@ -7,8 +7,8 @@
     "generateTeams": "node ./lib/generateTeamsJson.js",
     "predev": "npm run generateTeams",
     "dev": "nodemon index",
-    "prebuild": "npm run generateTeams",
-    "build": "node index"
+    "prestart": "npm run generateTeams",
+    "start": "node index"
   },
   "author": "",
   "license": "ISC",
