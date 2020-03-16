@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true })
 const Api = require('../../utils/Api.js')
+const storedJson = require('../../utils/teams.json')
 
 router.get('/', (req, res) => {
     Api.get('/competitions/PL/standings')
@@ -8,7 +9,14 @@ router.get('/', (req, res) => {
     .then(response => {
         const totalTable = response.standings.find(table => table.type === 'TOTAL')
 
-        res.render('standings', { rows: totalTable.table, template: 'standings' })
+        const leagueTable = totalTable.table.map(row => {
+            const thisTeam = storedJson.teams.find(team => team.id === row.team.id)
+
+            row.team = thisTeam.shortName
+            return row
+        })
+
+        res.render('standings', { rows: leagueTable, template: 'standings' })
     })
 })
 
