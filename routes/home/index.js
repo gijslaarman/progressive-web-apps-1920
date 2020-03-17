@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router({ mergeParams: true })
 const Api = require('../../utils/Api.js')
 const storedJson = require('../../utils/teams.json')
-// const information = JSON.parse(storedJson)
+const helper = require('../../utils/helpers.js')
+const dayjs = require('dayjs')
 
 const mapMatchData = matchData => {
     const mappedMatches = matchData.matches.map(match => {
@@ -16,6 +17,10 @@ const mapMatchData = matchData => {
         }
 
         return {
+            id: match.id,
+            status: helper.getStatus(match.status, match.utcDate),
+            date: dayjs(match.utcDate).format('ddd, DD/MM'),
+            score: match.score.fullTime,
             homeTeam: match.homeTeam,
             awayTeam: match.awayTeam
         }
@@ -30,8 +35,6 @@ router.get('/', (req, res) => {
     Api.get('/competitions/PL/matches?matchday=' + currentMatchday)
     .then(r => r.data)
     .then(response => {
-        // res.send(response)
-        // res.send(mapMatchData(response))
         return res.render('home', { matchday: response.filters.matchday, matches: mapMatchData(response), template: "matches" })
     })
 })
