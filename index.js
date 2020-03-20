@@ -8,7 +8,6 @@ app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'default', layoutsDir: `$
 app.set('view engine', 'hbs')
 app.use(express.static('public'))
 
-
 // Routes
 app.use('/', require('./routes/home'))
 app.use('/standings', require('./routes/standings'))
