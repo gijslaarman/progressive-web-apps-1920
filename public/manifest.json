@@ -3,7 +3,7 @@
   "short_name": "PL Matches",
   "theme_color": "#37003c",
   "background_color": "#f5f5f5",
-  "display": "browser",
+  "display": "standalone",
   "Scope": "/",
   "start_url": "/",
   "icons": [
