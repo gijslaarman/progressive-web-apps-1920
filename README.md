@@ -1,4 +1,7 @@
 # Making a client side app into a Progressive Web App
+This is an enhanced version of one of my previously made [app](https://github.com/gijslaarman/web-app-from-scratch-1920). This was build clientside only, this project is serverside rendered & clientside enhanced.
+
+[live demo](pwa.gijsbertcharles.com)
 
 ## Installation
 ```shell
