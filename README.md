@@ -23,12 +23,44 @@ npm start # For production
 generateTeams # For creating a local JSON file with the teams to keep on the server.
 open:localhost # For opening a browser window when running dev script.
 ```
-
-## Current audit score
-<img src="/docs/img/score.png" alt="Google audit score: 100 on performance, 78 on accessibility, 93 on best practices & 78 on SEO" style="margin: 0 auto; width: 80%"/>
-
 #### Api key
 Apply here: [football-data](https://football-data.org)
+
+## Optimization
+
+### Audit score
+<img src="/docs/img/score.png" alt="Google audit score: 100 on performance, 78 on accessibility, 93 on best practices & 78 on SEO" style="margin: 0 auto; width: 80%"/>
+
+### Gzipping compression
+With Express it was easy to implement Gzipping.
+![Proof of gzipping](/docs/img/gzip.png)
+
+### Service worker
+To make the PWA offline available I implemented a service worker. Currently it caches all requests made, so the app will be available offline as well as downloadable as a chrome extension.
+
+## Clientside vs Serverside
+So I've handled both Clientside & Serverside in my project. The pages are all rendered server side for direct navigation. But handled client side with a preventDefault on every anchor in the site, that makes api calls and generates HTML all clientside. Not fully functioning though, things that aren't working:
+- clientside match detailpage handling.
+
+This is to theoretically lower the loadbalance of the server.
+
+## Service worker & manifest
+I implemented a service worker to cache the files the client fetches. Currently it's set up as a search cache & fallback to network. So it will still make requests everytime but the client can handle it without making a request. If you were to be offline than the cache can find the files but not able to make a request. https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker#cache_falling_back_to_the_network
+![Proof of service worker & downloadable app](/docs/img/manifest.png)
+
+## Critical rendering path
+The server builds the HTML for the client and with that links it to the CSS & JS.
+![paint steps of my app](/docs/img/paint.png)
+
+This is the steps of the first meaningful paint according to google. The Images are sometimes not loaded in yet on the second image.
+
+When the JS is loaded in it takes over the website to make it more of a Single webpage application feeling. Whilst still being backed up by a server.
+
+The application is too small to properly test this since the build and rendering is too fast. (The CSS is instantly loaded in according to google audits)
+
+
+<!-- 
+
 
 ## My struggles
 - I had to switch to another rendering engine, took me almost a day of work to understand it. EJS was super buggy, handlebars is a lot more reliable. On client side you ofcourse don't see a difference but on the backend I had to rewrite quite a lot.
@@ -47,4 +79,4 @@ Apply here: [football-data](https://football-data.org)
 - [x] Implement service worker.
 - [ ] Make it installable.
 - [ ] Optimize service worker.
-- [ ] Style the app 1:1 with the offline variant. (The currently selected menu item highlight is not working etc.)
+- [ ] Style the app 1:1 with the offline variant. (The currently selected menu item highlight is not working etc.) -->
