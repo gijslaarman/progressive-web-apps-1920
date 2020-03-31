@@ -1,11 +1,31 @@
 # Making a client side app into a Progressive Web App
 
 ## Installation
+```shell
+# Clone repository
+git clone https://github.com/gijslaarman/progressive-web-apps-1920.git && cd progressive-web-apps-1920
+
+# Install dependencies
+npm install
+
+# Create .env file
+touch .env && sudo nano .env
+
+# Paste in these configs:
+PORT=<your_port_number>
+API_KEY=<your_api_key> # Where to get an API key down below 👇
+
+# Scripts
+npm run dev # For file change detection
+npm start # For production
+
+# Build scripts
+generateTeams # For creating a local JSON file with the teams to keep on the server.
+open:localhost # For opening a browser window when running dev script.
 ```
-Create .env file, insert:
-PORT=0000 // Change this to your desired number
-API_KEY="your key" // Request an API key from football-data.org
-```
+
+## Current audit score
+<img src="/docs/img/score.png" alt="Google audit score: 100 on performance, 78 on accessibility, 93 on best practices & 78 on SEO" style="margin: 0 auto; width: 80%"/>
 
 #### Api key
 Apply here: [football-data](https://football-data.org)
