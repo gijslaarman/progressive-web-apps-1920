@@ -8,20 +8,28 @@
     "open:localhost": "open http://localhost:4000",
     "predev": "npm run generateTeams && npm run open:localhost",
     "dev": "nodemon index",
-    "prestart": "npm run generateTeams",
-    "start": "node index"
+    "prestart": "npm run generateTeams && npm run build-js",
+    "start": "node index",
+    "build-js": "rollup --config src/js/rollup.config.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.9.6",
     "axios": "^0.19.2",
     "compression": "^1.7.4",
     "dayjs": "^1.8.23",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0"
+    "express-handlebars": "^3.1.0",
+    "mini-svg-data-uri": "^1.2.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "@rollup/plugin-alias": "^3.1.0",
+    "@rollup/plugin-babel": "^5.0.0",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "nodemon": "^2.0.2",
+    "rollup": "^2.9.0",
+    "rollup-plugin-terser": "^5.3.0"
   }
 }

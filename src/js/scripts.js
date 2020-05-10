@@ -4,10 +4,9 @@ function match() {
     return 'matchDetails'
 }
 
-import home from './templates/home.js'
-import standings from './templates/standings.js'
-import { setTeams, getTeams } from './utils/cache.js'
-
+import home from '@templates/home.js'
+import standings from '@templates/standings.js'
+import cache from '@utils/cache.js'
 
 async function fetchTeams() {
     const url = window.location.origin + '/api/teams'
@@ -16,7 +15,11 @@ async function fetchTeams() {
     return fetchedTeams
 }
 
-fetchTeams().then(result => setTeams(result))
+(function() {
+    fetchTeams().then(result => {
+        cache.setTeams(result)
+    })
+})()
 
 const routes = [
     { id: 'matches', path: /^\/$/, template: home },

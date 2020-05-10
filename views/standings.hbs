@@ -14,7 +14,7 @@
 
         {{#each rows}}
         <tr onclick="window.location='/teams/{{team}}'">
-            <td class="club"><span class="position">{{position}}</span> <img class="crest" src="img/{{team}}.svg" />{{team}}</td>
+            <td class="club"><span class="position">{{position}}</span><img src="{{svg}}" alt="logo of {{team}}">{{team}}</td>
             <td>{{playedGames}}</td>
             <td class="no-mobile">{{won}}</td>
             <td class="no-mobile">{{draw}}</td>

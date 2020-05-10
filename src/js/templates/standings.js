@@ -1,13 +1,13 @@
 import { loading, ApiCall } from '../utils/utils.js'
-import { getTeams } from '../utils/cache.js'
+import cache from '../utils/cache.js'
 
 function createRows(table) {
     return table.table.map(row => {
-        const team = getTeams().teams.find(team => team.id === row.team.id)
+        const team = cache.getTeams().teams.find(team => team.id === row.team.id)
 
         return `
         <tr onclick="window.location='#/teams/${team.shortName}'">
-            <td class="club"><span class="position">${row.position}</span> <img class="crest" src="/img/${team.shortName}.svg" />${team.shortName}</td>
+            <td class="club"><span class="position">${row.position}</span> <img class="crest" src="${team.svg}" />${team.shortName}</td>
             <td>${row.playedGames}</td>
             <td class="no-mobile">${row.won}</td>
             <td class="no-mobile">${row.draw}</td>

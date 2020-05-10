@@ -32,14 +32,14 @@ const matchBlock = async (matchData) => {
             <div class="teams">
                 <div class="team ${matchData.score.winner === "AWAY_TEAM" ? 'lost' : ''}">
                     <span>
-                        <img src="/img/${homeTeam.shortName}.svg"/>
+                        <img src="${homeTeam.svg}"/>
                         ${homeTeam.shortName}
                     </span>
                     ${matchData.status !== "SCHEDULED" && matchData.status !== "POSTPONED" ? `<span>${matchData.score.fullTime.homeTeam}</span>` : ''}
                 </div>
                 <div class="team ${matchData.score.winner === "HOME_TEAM" ? 'lost' : ''}">
                     <span>
-                    <img src="/img/${awayTeam.shortName}.svg"/>
+                    <img src="${awayTeam.svg}"/>
                     ${awayTeam.shortName}
                     </span>
                     ${matchData.status !== "SCHEDULED" && matchData.status !== "POSTPONED" ? `<span>${matchData.score.fullTime.awayTeam}</span>` : ''}

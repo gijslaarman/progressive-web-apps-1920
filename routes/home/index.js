@@ -7,15 +7,15 @@ const dayjs = require('dayjs')
 
 const mapMatchData = matchData => {
     const mappedMatches = matchData.matches.map(match => {
-        match.homeTeam.shortName = storedJson.teams.find(team => team.id === match.homeTeam.id).shortName
-        match.awayTeam.shortName = storedJson.teams.find(team => team.id === match.awayTeam.id).shortName
+        match.homeTeam = storedJson.teams.find(team => team.id === match.homeTeam.id)
+        match.awayTeam = storedJson.teams.find(team => team.id === match.awayTeam.id)
 
         if (match.score.winner === 'HOME_TEAM') {
             match.homeTeam.winner = true
         } else if(match.score.winner === 'AWAY_TEAM') {
             match.awayTeam.winner = true
         }
-
+        
         return {
             id: match.id,
             status: helper.getStatus(match.status, match.utcDate),
