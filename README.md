@@ -33,7 +33,7 @@ Apply here: [football-data](https://football-data.org)
 ## Optimization
 
 ### Audit score
-<img src="/docs/img/score.png" alt="Google audit score: 100 on performance, 78 on accessibility, 93 on best practices & 78 on SEO" style="margin: 0 auto; width: 80%"/>
+<img src="./docs/img/score.png" alt="Google audit score: 100 on performance, 78 on accessibility, 93 on best practices & 78 on SEO" style="margin: 0 auto; width: 80%"/>
 
 ### Service worker
 To make the PWA offline available I implemented a service worker. The service worker only stores the core functionalities & the /standings, offline & homepage.
@@ -46,10 +46,12 @@ This is to theoretically lower the loadbalance of the server.
 
 ## Service worker & manifest
 Altered the service worker strategy. It now checks the local cache first, if it doesn't find a response it will send out a fetch request. If it's not possible to fetch either it will render the offline page. https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
+
 ![Proof of service worker & downloadable app](/docs/img/manifest.png)
 
 ## Critical rendering path
 The server builds the HTML for the client and with that links it to the CSS & JS.
+
 ![paint steps of my app](/docs/img/paint.png)
 
 This is the steps of the first meaningful paint according to google. The Images are sometimes not loaded in yet on the second image.
@@ -64,6 +66,7 @@ The clientside javascript is modular in the source folder. With rollup it gets b
 
 #### Gzipping compression
 ![Proof of gzipping](/docs/img/gzip.png)
+
 To reduce file sizes I implemented Gzipping compression with Express.
 
 

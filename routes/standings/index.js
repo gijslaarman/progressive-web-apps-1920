@@ -11,14 +11,11 @@ router.get('/', (req, res) => {
 
         const leagueTable = totalTable.table.map(row => {
             const thisTeam = storedJson.teams.find(team => team.id === row.team.id)
-            
+
             row.svg = thisTeam.svg
             row.team = thisTeam.shortName
             return row
         })
-
-        console.log(leagueTable);
-        
 
         res.render('standings', { rows: leagueTable, template: 'standings' })
     })
