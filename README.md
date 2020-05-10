@@ -20,10 +20,11 @@ API_KEY=<your_api_key> # Where to get an API key down below 👇
 
 # Scripts
 npm run dev # For file change detection
-npm start # For production
+npm start # For production, generates main.js in /public
 
 # Build scripts
 generateTeams # For creating a local JSON file with the teams to keep on the server.
+build-js # command to call Rollup to minify the clientside javascript.
 open:localhost # For opening a browser window when running dev script.
 ```
 #### Api key
@@ -34,12 +35,8 @@ Apply here: [football-data](https://football-data.org)
 ### Audit score
 <img src="/docs/img/score.png" alt="Google audit score: 100 on performance, 78 on accessibility, 93 on best practices & 78 on SEO" style="margin: 0 auto; width: 80%"/>
 
-### Gzipping compression
-With Express it was easy to implement Gzipping.
-![Proof of gzipping](/docs/img/gzip.png)
-
 ### Service worker
-To make the PWA offline available I implemented a service worker. Currently it caches all requests made, so the app will be available offline as well as downloadable as a chrome extension.
+To make the PWA offline available I implemented a service worker. The service worker only stores the core functionalities & the /standings, offline & homepage.
 
 ## Clientside vs Serverside
 So I've handled both Clientside & Serverside in my project. The pages are all rendered server side for direct navigation. But handled client side with a preventDefault on every anchor in the site, that makes api calls and generates HTML all clientside. Not fully functioning though, things that aren't working:
@@ -48,7 +45,7 @@ So I've handled both Clientside & Serverside in my project. The pages are all re
 This is to theoretically lower the loadbalance of the server.
 
 ## Service worker & manifest
-I implemented a service worker to cache the files the client fetches. Currently it's set up as a search cache & fallback to network. So it will still make requests everytime but the client can handle it without making a request. If you were to be offline than the cache can find the files but not able to make a request. https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker#cache_falling_back_to_the_network
+Altered the service worker strategy. It now checks the local cache first, if it doesn't find a response it will send out a fetch request. If it's not possible to fetch either it will render the offline page. https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
 ![Proof of service worker & downloadable app](/docs/img/manifest.png)
 
 ## Critical rendering path
@@ -59,7 +56,15 @@ This is the steps of the first meaningful paint according to google. The Images 
 
 When the JS is loaded in it takes over the website to make it more of a Single webpage application feeling. Whilst still being backed up by a server.
 
-The application is too small to properly test this since the build and rendering is too fast. (The CSS is instantly loaded in according to google audits)
+#### SVG's to data objects
+To reduce the amount of requests made I cached the teams with their crest-image data. as a data:image object. Instead of having to make 20x requests for the images it is now inline in the HTML. Profit.
+
+#### Bundled, minified and shipped as a mini package
+The clientside javascript is modular in the source folder. With rollup it gets bundled & minified to reduce the file sizes & amount of requests made. Main.js is also cached on serviceWorker install, to reduce wait times next time.
+
+#### Gzipping compression
+![Proof of gzipping](/docs/img/gzip.png)
+To reduce file sizes I implemented Gzipping compression with Express.
 
 
 <!-- 
