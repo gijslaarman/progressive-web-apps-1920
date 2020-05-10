@@ -1,3 +1,4 @@
 /node_modules
 .env
 /public/main.js
+.DS_Store
